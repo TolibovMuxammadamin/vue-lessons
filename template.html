@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model.trim="eventname" type="text">
+        <input v-model="attr" type="text">
+        <br>
+        <input v-model="msg" type="text" :disabled="!isEditing">
+        <button @click="isEditing = !isEditing">
+            {{ isEditing ? 'Save' : 'Edit' }}
+        </button>
+        <h4>{{ msg }}</h4>
+        <h4 v-text="msg"></h4>
+        <h4 v-once>{{ msg }}</h4>
+        <h4 v-html="htmlCode" v-bind:[attr]="msg"></h4>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                attr: "text",
+                msg: "Hello World",
+                eventname: "click",
+                isEditing: false,
+                htmlCode: "<i>Italic text</i>"
+            }
+        })
+    </script>
+</body>
+
+</html>
