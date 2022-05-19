@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="message" type="text">
+        <div>
+            Message: {{ message }}
+        </div>
+        <div>
+            <input v-model="fullName" type="text">
+        </div>
+        <ul>
+            <li>First Name: {{ firstName }}</li>
+            <li>Last Name: {{ lastName }} </li>
+        </ul>
+        <h3 v-if="showAlert">New todo added</h3>
+        <form @submit.prevent="addTodo">
+            <input v-model="todo" type="text">
+        </form>
+        <ul>
+            <li v-for="t in todos">
+                {{ t.value }}
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message: "Hello Vue",
+                fullName: '',
+                firstName: '',
+                lastName: '',
+                todo: '',
+                todos: [
+                    {value: 'Sleping'},
+                    {value: 'Eating'},
+                    {value: 'Training'},
+                    {value: 'Coding'}
+                ],
+                showAlert: false
+            },
+            methods: {
+                addTodo() {
+                  this.todos.push({value: this.todo});
+                  this.todo = '';
+                  this.showAlert = true;
+                  setTimeout(() => this.showAlert = false, 2000);
+                },  
+            },
+            watch: {
+                fullName (newFullName, oldFullName) {
+                    this.firstName = newFullName.split(' ')[0];
+                    this.lastName = newFullName.split(' ')[1];
+                },
+                todos: {
+                    deep: true,
+                    handler(todos) {
+                        console.log(todos);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

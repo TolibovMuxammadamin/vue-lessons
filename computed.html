@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="message" type="text">
+        <div>
+            Message: {{ message }}
+        </div>
+        <div>
+            Reverse Message: {{ msgReverse }}
+        </div>
+        <div>
+            Reverse Message: {{ reverseMsg() }}
+        </div>
+        <div>
+            <input v-model="fullName" type="text">
+        </div>
+        <ul>
+            <li>First Name: {{ firstName }}</li>
+            <li>Last Name: {{ lastName }} </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message: "Hello Vue",
+                firstName: '',
+                lastName: ''
+            },
+            methods: {
+                reverseMsg() {
+                    return this.message.split('').reverse().join('')
+                }
+            },
+            computed: {
+                msgReverse () {
+                    return this.message.split('').reverse().join('');
+                },
+                fullName: {
+                    get () {
+                        return this.firstName + ' ' + this.lastName;
+                    },
+                    set (value) {
+                        console.log(value);
+                        this.firstName = value.split(' ')[0];
+                        this.lastName = value.split(' ')[1];
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
