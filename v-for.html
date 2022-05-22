@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input v-model="filterVal" type="text" />
+      <ul>
+        <li v-for="(product, index) in products" :key="product.id">
+          {{ index }} - {{ product.name }}
+        </li>
+      </ul>
+      <table>
+        <tr v-for="(propValue, propName, propIndex) in user" :key="propName">
+          <td>{{propIndex}}</td>
+          <td>{{propName}}</td>
+          <td>{{ propValue }}</td>
+        </tr>
+      </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          filterVal: "",
+          products: [
+            { id: 1, name: "Apple" },
+            { id: 2, name: "Apricot" },
+            { id: 3, name: "Banana" },
+            { id: 4, name: "Strawberry" },
+            { id: 5, name: "Cherry" },
+            { id: 6, name: "Watermelon" },
+          ],
+          user: {
+            username: "Abdurahmon",
+            age: 16,
+            phone: "+998 77 444-77-77",
+          },
+        },
+        computed: {},
+      });
+    </script>
+  </body>
+</html>

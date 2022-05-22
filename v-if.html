@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .active {
+        background-color: darkcyan;
+      }
+
+      .no-active {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="currentTab = 'home'">Home</button>
+      <button @click="currentTab = 'about'">About</button>
+      <button @click="currentTab = 'services'">Services</button>
+      <button @click="currentTab = 'contact'">Contact</button>
+      <div v-if="currentTab === 'home'" key="home">
+        <h1>Home Page</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque
+          doloribus quos quis enim natus quibusdam. Voluptate, quam molestias
+          fugit ipsa veritatis eius doloribus, perferendis aut laborum,
+          quibusdam rerum amet!
+        </p>
+      </div>
+      <div v-else-if="currentTab === 'about'" key="about">
+        <h1>About Page</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque
+          doloribus quos quis enim natus quibusdam. Voluptate, quam molestias
+          fugit ipsa veritatis eius doloribus, perferendis aut laborum,
+          quibusdam rerum amet!
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque
+          doloribus quos quis enim natus quibusdam. Voluptate, quam molestias
+          fugit ipsa veritatis eius doloribus, perferendis aut laborum,
+          quibusdam rerum amet!
+        </p>
+      </div>
+      <div v-else-if="currentTab === 'services'" key="services">
+        <h1>Services</h1>
+        <ul>
+          <li>Auto Service</li>
+          <li>Mikro Service</li>
+          <li>Makro Service</li>
+        </ul>
+      </div>
+      <div v-else key="contacts">
+        <h1>Contacts</h1>
+        <p>Tel: +998 99 777-77-77</p>
+        <p>Email: test@mail.com</p>
+        <input type="text" placeholder="Input your contacts" key="contacts" />
+      </div>
+
+      <button @click="toggle = !toggle">Toggle</button>
+      <p v-show="toggle">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum nam
+        recusandae soluta, minus error maiores non necessitatibus quae beatae
+        magnam libero maxime exercitationem, tempore nemo ducimus provident eos
+        rem temporibus.
+      </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          currentTab: "home",
+          toggle: false,
+        },
+      });
+    </script>
+  </body>
+</html>

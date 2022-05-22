@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="toggle = !toggle">Toggle width</button>
+        <p :style="toggle ? 'width: 100%': 'width: 50%'">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam illum, rerum doloremque libero, non earum unde ratione id quos aut sapiente eos fugiat voluptates quibusdam suscipit nulla praesentium similique sunt.
+        </p>
+        <p :style="{ 
+            width: toggle ? '100%' : '50%', 
+            'background-color': toggle ? 'darkcyan' : 'red' 
+        }"
+        >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti labore aperiam sequi sint obcaecati nostrum magnam vitae ratione odit at aliquam dolores cumque expedita, ad est velit enim dolor nisi?
+        </p>
+        <p :style="[toggle ? 'width: 100%' : 'width: 50%']"
+        >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti labore aperiam sequi sint obcaecati nostrum magnam vitae ratione odit at aliquam dolores cumque expedita, ad est velit enim dolor nisi?
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                toggle: false
+            }
+        })
+    </script>
+</body>
+</html>
