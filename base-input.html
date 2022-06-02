@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container my-3">
+        <h4>Registration form</h4>
+        <base-input
+          v-model="registerData.username"
+          label="Username"
+        ></base-input>
+        <base-input
+          v-model="registerData.email"
+          label="Email"
+          type="email"
+        ></base-input>
+        <base-input
+          v-model="registerData.password"
+          label="Password"
+          :type="passInputType"
+        >
+          <div>
+            Password
+            <button
+              @click="passInputType = passInputType === 'password' ? 'text' : 'password'"
+              class="btn btn-outline-primary"
+            >
+              <i
+                :class="{
+                  'fa-eye': passInputType === 'password',
+                  'fa-eye-slash': passInputType === 'text'
+              }"
+                class="fa"
+              ></i>
+            </button>
+          </div>
+        </base-input>
+      </div>
+    </div>
+
+    <script type="text/x-template" id="base-input">
+      <div class="mb-3">
+        <slot>
+            <label for="input" class="form-label">
+                {{ label }}
+            </label>
+        </slot>
+        <input
+          :value="value"
+          @input="emitInput"
+          :type="type ? type : 'text'"
+          class="form-control"
+          id="input"
+          aria-describedby="emailHelp"
+        />
+        <div v-if="helperText" class="form-text">
+          {{ helperText }}
+        </div>
+      </div>
+    </script>
+
+    <script>
+      Vue.component("base-input", {
+        template: "#base-input",
+        props: ["label", "value", "helperText", "type"],
+        methods: {
+          emitInput($event) {
+            this.$emit("input", $event.target.value);
+          },
+        },
+      });
+
+      new Vue({
+        el: "#app",
+        data: {
+          registerData: {
+            username: "",
+            email: "",
+            password: "",
+          },
+          passInputType: "password",
+        },
+        methods: {},
+      });
+    </script>
+  </body>
+</html>

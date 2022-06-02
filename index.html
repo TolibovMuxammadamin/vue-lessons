@@ -18,12 +18,13 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   </head>
   <body>
     <div id="app">
       <div class="container my-3">
         <base-btn
-          @click.native="onClick"
+          @bos="onClick"
           title="Some value"
           color="primary"
           icon="fa-user"
@@ -32,36 +33,66 @@
         </base-btn>
         <base-btn color="warning" icon="fa-phone"> Phone </base-btn>
         <base-btn color="success" icon="fa-check"> Success </base-btn>
+
+        <base-input />
+        <base-input />
+        <base-input />
       </div>
 
       <!-- 1 - WAY -->
       <script type="text/x-template" id="base-btn">
-        <button class="btn" :class="'btn-' + color">
+        <button @click="emitBos" class="btn" :class="'btn-' + color">
             <i class="fa" :class="icon"></i>
             <slot></slot>
+            <span class="badge bg-dark">
+              {{ count }}
+            </span>
         </button>
       </script>
-      <!-- 2 WAY -->
-      <!-- <base-btn inline-template>
-        <button class="btn" :class="'btn-' + type">
-          <i class="fa" :class="icon"></i>
-          <slot></slot>
-        </button>
-      </base-btn> -->
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+      <script type="text/x-template" id="base-input">
+        <div class="mb-3">
+          <label for="input" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="input"
+            aria-describedby="emailHelp"
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+      </script>
+    </div>
     <script>
       Vue.component("base-btn", {
         template: "#base-btn",
         props: ["color", "icon"],
+        data() {
+          return {
+            count: 1,
+          };
+        },
+        methods: {
+          emitBos($event) {
+            this.count++;
+            this.$emit("bos", $event);
+          },
+        },
+      });
+
+      Vue.component("base-input", {
+        template: "#base-input",
       });
 
       new Vue({
         el: "#app",
         methods: {
-          onClick() {
-            console.log("clicked");
+          onClick($event) {
+            console.log("clicked", $event);
           },
         },
       });
