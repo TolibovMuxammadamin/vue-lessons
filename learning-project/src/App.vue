@@ -1,36 +1,67 @@
 <template>
   <div class="app">
-    <div style="height: 800px">
-      {{ msg }}
-      <button class="btn btn-primary">Btn</button>
-      <input v-model="msg" type="text" />
-      <Test></Test>
-    </div>
-    <b-navbar fixed="top" bg-color="primary" dark>
-      <b-container>
-        <b-navbar-brand>Food App</b-navbar-brand>
+    <div style="height: 500px">
+      <b-container class="my-3">
+        <div class="row">
+          <div class="col-md-6 offset-md-3 text-center">
+            <div class="btn-group">
+              <button @click="form = 'TestLogin'" class="btn btn-outline-dark">
+                Login
+              </button>
+              <button
+                @click="form = 'TestRegister'"
+                class="btn btn-outline-dark"
+              >
+                Register
+              </button>
+            </div>
+          </div>
+        </div>
       </b-container>
-    </b-navbar>
-    <div style="height: 800px">
-      {{ msg }}
-      <button class="btn btn-primary">Btn</button>
-      <input v-model="msg" type="text" />
-      <Test></Test>
+
+      <keep-alive>
+        <component
+          :is="form"
+          :email.sync="data.email"
+          :username.sync="data.username"
+          :password.sync="data.password"
+        />
+      </keep-alive>
+
+      <!-- <TestLogin
+        v-if="form === 'TestLogin'"
+        :username.sync="loginData.username"
+        :password.sync="loginData.password"
+      />
+      <TestRegister
+        v-if="form === 'TestRegister'"
+        :email.sync="registerData.email"
+        :username.sync="registerData.username"
+        :password.sync="registerData.password"
+      /> -->
     </div>
   </div>
 </template>
 
 <script>
-import Test from "@/components/Test.vue";
-import BContainer from "@/components/ui/Grid/BContainer";
-import BNavbar from "@/components/ui/Layout/BNavbar/BNavbar.vue";
-import BNavbarBrand from "@/components/ui/Layout/BNavbar/BNavbarBrand.vue";
+import BContainer from "./components/ui/Grid/BContainer.vue";
+import TestLogin from "./components/ui/TestLogin.vue";
+import TestRegister from "./components/ui/TestRegister.vue";
 export default {
-  components: { Test, BNavbar, BContainer, BNavbarBrand },
+  components: { TestLogin, BContainer, TestRegister },
   name: "App",
   data() {
     return {
-      msg: "Hello Vue Project",
+      loginData: {
+        username: "",
+        password: "",
+      },
+      data: {
+        email: "",
+        username: "",
+        password: "",
+      },
+      form: "TestLogin",
     };
   },
 };

@@ -1,2 +1,6 @@
 homeworks
 .vscode
+.idea/modules.xml
+.idea/vcs.xml
+.idea/vue-lessons.iml
+.idea/workspace.xml
