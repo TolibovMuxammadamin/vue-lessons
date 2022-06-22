@@ -4,3 +4,4 @@ homeworks
 .idea/vcs.xml
 .idea/vue-lessons.iml
 .idea/workspace.xml
+*.xml
