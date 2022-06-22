@@ -2,7 +2,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th v-for="header in headers" :key="value" scope="col">
+        <th v-for="header in headers" :key="header.value" scope="col">
           {{ header.text }}
         </th>
       </tr>

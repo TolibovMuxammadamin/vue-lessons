@@ -34,6 +34,9 @@ export default {
     username: String,
     password: String,
   },
+  mounted() {
+    console.log(this.$parent);
+  },
 };
 </script>
 
