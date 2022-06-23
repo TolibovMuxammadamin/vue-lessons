@@ -1,36 +1,45 @@
 <template>
-  <div :class="{ 'bg-dark': dark }">
-    <div class="container">
-      <DarkModeSwitch />
-      <UserPage />
+  <div>
+    <div class="container my-3">
+      <h4>Posts</h4>
+
+      <ul v-if="posts.length > 0" class="list-group">
+        <li v-for="post in posts" class="list-group-item">
+          {{ post.title | trim | capitalize }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import DarkModeSwitch from "./components/DarkModeSwitch.vue";
-import UserPage from "./components/UserPage.vue";
 export default {
-  components: {
-    UserPage,
-    DarkModeSwitch,
-  },
   name: "App",
   data() {
     return {
-      dark: false,
+      posts: [],
     };
   },
-  provide() {
-    return {
-      setDark: this.setDark,
-      dark: this.dark,
-    };
-  },
-  methods: {
-    setDark(val) {
-      this.dark = val;
+  filters: {
+    capitalize(str) {
+      return str
+        .split(" ")
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(" ");
     },
+    trim(str) {
+      return str.trim();
+    },
+  },
+  methods: {},
+  async mounted() {
+    const { data } = await this.$axios.get("posts", {
+      params: {
+        _limit: 10,
+      },
+    });
+    this.posts = data;
+    console.log(data);
   },
 };
 </script>
